@@ -17,6 +17,7 @@
   },
   "homepage": "https://github.com/vinaycat/TournamentBot#readme",
   "dependencies": {
+    "canvas": "^2.6.1",
     "discord.js": "^12.5.1"
   }
 }
