@@ -22,15 +22,6 @@ function embedMessage(output, message) {
         .setDescription(output);
     message.channel.send(embed);
 }
-async function displayCanvas(message, args) {
-    let image = "https://upload.wikimedia.org/wikipedia/commons/thumb/b/b6/Image_created_with_a_mobile_phone.png/1200px-Image_created_with_a_mobile_phone.png";
-    const canvas = Canvas.createCanvas(500, 1000);
-    const ctx = canvas.getContext('2d');
-    const background = await Canvas.loadImage(image);
-    ctx.drawImage(background, 0, 0, canvas.width, canvas.height);
-    const attachment = new Discord.MessageAttachment(canvas.toBuffer(), './hangmanImage.png');
-    return ['attachment://hangmanImage.png', attachment];
-}
 client.on("message", async message => {
     if (message.content.startsWith(prefix)) {
         const args = message.content.substring(prefix.length).split(" ");
@@ -55,8 +46,9 @@ client.on("message", async message => {
             client.commands.get('returnPages').execute(list, "ListOfPlayers", message, " "); 
         }
         if(command == "display"){
-            let attachement = await displayCanvas(message, args);
-            console.log(attachement)
+            let block = "https://i.pinimg.com/originals/ad/47/af/ad47af29ad50df1477b9413f9d521db0.jpg"
+            let image = "https://images.pexels.com/videos/3045163/free-video-3045163.jpg?auto=compress&cs=tinysrgb&dpr=1&w=500"
+            let attachement = await client.commands.get('canvas').execute(message, args, image,500,500, block);
             let embed = new Discord.MessageEmbed();
             embed.setFooter(" ");
             embed.setImage(attachement[0]);
